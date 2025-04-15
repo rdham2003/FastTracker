@@ -9,6 +9,7 @@
         INTERVIEW,
         OFFER,
         REJECTED,
-        ACCEPTED
+        ACCEPTED,
+        UNKNOWN
     }
 }

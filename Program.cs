@@ -4,6 +4,8 @@ namespace FastTracker
     {
         public static void Main(string[] args)
         {
+            Console.WriteLine("Current dir: " + Directory.GetCurrentDirectory());
+
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
