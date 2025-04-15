@@ -57,5 +57,14 @@ namespace FastTracker.Tests
                 Assert.IsTrue(jobs[i].Equals(expectedJobs[i]));
             }
         }
+
+        [Test]
+        public void testBadFile()
+        {
+            FileParser fileparser = new FileParser("C:\\Users\\rohit\\OneDrive\\Desktop\\FastTracker\\Tests\\badfile.csv");
+            List<Job> jobs = fileparser.ParseSheetForJobs();
+
+            Assert.IsNull(jobs);
+        }
     }
 }

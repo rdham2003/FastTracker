@@ -2,6 +2,8 @@
 using System.IO;
 using DotNetEnv;
 using static System.Net.WebRequestMethods;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace FastTracker.Models
 {
@@ -27,11 +29,19 @@ namespace FastTracker.Models
 
                 for (int i = 0; i < lines.Length; i++)
                 {
+                    string[] job = lines[i].Split(',');
+                    if (job.Length != 4)
+                    {
+                        return null;
+                    }
+                    if (i == 0 && job[0] != "Company" && job[1] != "Title" && job[2] != "Status" && job[3] != "Date")
+                    {
+                        return null;
+                    }
                     if (i == 0)
                     {
                         continue;
                     }
-                    string[] job = lines[i].Split(',');
                     string url = $@"https://img.logo.dev/{job[0]}.com?token={apiKey}";
                     if (Enum.TryParse(job[2].ToUpper(), out Status status))
                     {

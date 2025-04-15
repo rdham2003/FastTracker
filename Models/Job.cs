@@ -4,32 +4,34 @@ namespace FastTracker.Models
 {
     public class Job
     {
-        private int id { get; set; }
-        private string name { get; set; }
-        private string position { get; set; }
-        private string pic_id { get; set; }
-        private Status status { get; set; }
-        private string dateUpdated { get; set; }
+        public int Id { get; set; } // This must exist
+        public string Name { get; set; }
+        public string Position { get; set; }
+        public string PicId { get; set; }
+        public Status Status { get; set; }
+        public string DateUpdated { get; set; }
 
-        public Job(int id, string name, string position, string pic_id, Status status, string dateUpdated)
+        public Job() { }
+
+        public Job(int id, string name, string position, string picId, Status status, string dateUpdated)
         {
-            this.id = id;
-            this.name = name;
-            this.position = position;
-            this.pic_id = pic_id;
-            this.status = status;
-            this.dateUpdated = dateUpdated;
+            Id = id;
+            Name = name;
+            Position = position;
+            PicId = picId;
+            Status = status;
+            DateUpdated = dateUpdated;
         }
 
         public override bool Equals(object obj)
         {
             return obj is Job job &&
-                   id == job.id &&
-                   name == job.name &&
-                   position == job.position &&
-                   pic_id == job.pic_id &&
-                   status == job.status &&
-                   dateUpdated == job.dateUpdated;
+                   Id == job.Id &&
+                   Name == job.Name &&
+                   Position == job.Position &&
+                   PicId == job.PicId &&
+                   Status == job.Status &&
+                   DateUpdated == job.DateUpdated;
         }
     }
 }
