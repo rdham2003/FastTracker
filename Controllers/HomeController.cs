@@ -7,6 +7,7 @@ namespace FastTracker.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private static List<Job> jobs = new List<Job>();
 
         public HomeController(ILogger<HomeController> logger)
         {
@@ -15,7 +16,7 @@ namespace FastTracker.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            return View(jobs);
         }
 
         public IActionResult Privacy()
@@ -27,6 +28,18 @@ namespace FastTracker.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        [HttpPost]
+        public IActionResult AddJob(String job, String position)
+        {
+            string apiKey = Environment.GetEnvironmentVariable("LogoApiKey");
+            Random rand = new Random();
+            string url = $@"https://img.logo.dev/{job}.com?token={apiKey}";
+            DateTime date = DateTime.Now;
+            Job newJob = new Job(rand.Next(0, 99999999), job, position, url, Status.APPLIED, date.ToString("MM-dd-yyyy"));
+            jobs.Add(newJob);
+            return RedirectToAction("Index");
         }
     }
 }

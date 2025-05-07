@@ -1,9 +1,4 @@
-﻿using System;
-using System.IO;
-using DotNetEnv;
-using static System.Net.WebRequestMethods;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
-using static System.Runtime.InteropServices.JavaScript.JSType;
+﻿using DotNetEnv;
 
 namespace FastTracker.Models
 {

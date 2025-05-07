@@ -5,3 +5,8 @@
 $(document).ready(function () {
     console.log("Hello World!");
 })
+
+$('#addJobs').click(function () {
+    console.log("YOOOOOOOO");
+    $('#form').fadeIn(1000);
+});
