@@ -24,8 +24,26 @@
                 <p>@job.PicId</p>
                 <p>@job.Status</p>
                 <p>@job.DateUpdated</p>
-                <button type="button" id="edit">Edit</button>
-                <button type="button" id="delete">Delete</button>
+                <button type="button" id="@($"edit{job.Id}")">Edit</button>
+                <div class="EditJob" id="@($"edit{job.Id}frm")">
+                    <form asp-controller="Home" asp-action="EditJob" asp-route-id="@job.Id" method="POST">
+                        <label>Change Job Status</label>
+                        <select id="status" name="status">
+                            <option value="Applied">Applied</option>
+                            <option value="OA">OA</option>
+                            <option value="Waitlisted">Waitlisted</option>
+                            <option value="Phone_Screen">Phone Screen</option>
+                            <option value="Interview">Interview</option>
+                            <option value="Offer">Offer</option>
+                            <option value="Rejected">Rejected</option>
+                            <option value="Accepted">Accepted</option>
+                        </select>
+                        <button type="submit" id="SubmitEdit">Change</button>
+                    </form>
+                </div>
+                <form asp-controller="Home" asp-action="DeleteJob" asp-route-id="@job.Id" onsubmit="return confirm('Are you sure you\'d like to delete this job?')">
+                    <button type="submit" class="DeleteJob "id="delete">Delete</button>
+                </form>
                 <hr />
             }
         }

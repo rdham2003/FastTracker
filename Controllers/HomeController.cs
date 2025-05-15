@@ -41,5 +41,32 @@ namespace FastTracker.Controllers
             jobs.Add(newJob);
             return RedirectToAction("Index");
         }
+
+        [HttpPost]
+        public IActionResult EditJob(int id, string status)
+        {
+            foreach(var job in jobs)
+            {
+                if (job.Id == id)
+                {
+                    job.Status = Enum.TryParse(status.ToUpper(), out Status newStat) ? newStat : Status.UNKNOWN;
+                }
+            }
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public IActionResult DeleteJob(int id)
+        {
+            foreach (var job in jobs)
+            {
+                if (job.Id == id)
+                {
+                    jobs.Remove(job);
+                    break;
+                }
+            }
+            return RedirectToAction("Index");
+        }
     }
 }
