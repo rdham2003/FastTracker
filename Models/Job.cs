@@ -9,11 +9,11 @@ namespace FastTracker.Models
         public string Position { get; set; }
         public string PicId { get; set; }
         public Status Status { get; set; }
-        public string DateUpdated { get; set; }
+        public DateTime DateUpdated { get; set; }
 
         public Job() { }
 
-        public Job(int id, string name, string position, string picId, Status status, string dateUpdated)
+        public Job(int id, string name, string position, string picId, Status status, DateTime dateUpdated)
         {
             Id = id;
             Name = name;

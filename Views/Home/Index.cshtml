@@ -42,7 +42,7 @@
                     </form>
                 </div>
                 <form asp-controller="Home" asp-action="DeleteJob" asp-route-id="@job.Id" onsubmit="return confirm('Are you sure you\'d like to delete this job?')">
-                    <button type="submit" class="DeleteJob "id="delete">Delete</button>
+                    <button type="submit" class="DeleteJob id="delete">Delete</button>
                 </form>
                 <hr />
             }
@@ -50,7 +50,6 @@
     </div>
     <br />
     <button id="addJobs">Click to Add new job</button>
-    <br />
     <div id="form">
         <form asp-controller="Home" asp-action="AddJob" method="POST">
             <label>Company</label>
@@ -60,6 +59,21 @@
             <button type="submit">Add Job</button>
         </form>
     </div>
+    @if (Model.Count != 0)
+    {
+        <form asp-controller="Home" asp-action="SortJobs">
+            <label>Sort by:</label>
+            <select id="sort" name="sortBy">
+                <option value="date" name="date">Date</option>
+                <option value="status" name="status">Status</option>
+                <option value="alpha" name="alpha">Alphabetical</option>
+                <option value="dateRev" name="dateRev">Date Reversed</option>
+                <option value="statusRev" name="statusRev">Status Reversed</option>
+                <option value="alphaRev" name="alphaRev">Alphabetical Reversed</option>
+            </select>
+            <button type="submit" id="sortJob">Sort</button>
+        </form>
+    }
 </div>
 
 <script src="~/js/site.js"></script>

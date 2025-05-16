@@ -1,6 +1,7 @@
 using System.Diagnostics;
 using FastTracker.Models;
 using Microsoft.AspNetCore.Mvc;
+using System.Linq;
 
 namespace FastTracker.Controllers
 {
@@ -37,7 +38,7 @@ namespace FastTracker.Controllers
             Random rand = new Random();
             string url = $@"https://img.logo.dev/{job}.com?token={apiKey}";
             DateTime date = DateTime.Now;
-            Job newJob = new Job(rand.Next(0, 99999999), job, position, url, Status.APPLIED, date.ToString("MM-dd-yyyy"));
+            Job newJob = new Job(rand.Next(0, 99999999), job, position, url, Status.APPLIED, date);
             jobs.Add(newJob);
             return RedirectToAction("Index");
         }
@@ -66,6 +67,13 @@ namespace FastTracker.Controllers
                     break;
                 }
             }
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public IActionResult SortJobs(string sortBy)
+        {
+            jobs = Sort.sortJobs(jobs, sortBy);
             return RedirectToAction("Index");
         }
     }

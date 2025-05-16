@@ -40,11 +40,11 @@ namespace FastTracker.Models
                     string url = $@"https://img.logo.dev/{job[0]}.com?token={apiKey}";
                     if (Enum.TryParse(job[2].ToUpper(), out Status status))
                     {
-                        jobs.Add(new Job(i, job[0], job[1], url, status, job[3]));
+                        jobs.Add(new Job(i, job[0], job[1], url, status, DateTime.Parse(job[3])));
                     }
                     else
                     {
-                        jobs.Add(new Job(i, job[0], job[1], url, Status.UNKNOWN, job[3]));
+                        jobs.Add(new Job(i, job[0], job[1], url, Status.UNKNOWN, DateTime.Parse(job[3])));
                     }
                 }
                 return jobs;
