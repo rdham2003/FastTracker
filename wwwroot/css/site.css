@@ -25,6 +25,39 @@ body {
     display: none;
 }
 
+#Title {
+    text-align: center;
+}
+
+.main_job_container {
+    display: block;
+    margin: auto;
+    height: 100%; 
+    width: 100%; 
+}
+
+
+
+.Job_Container {
+    border: 2px solid black;
+    height: 100px;
+    width: 50em;
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+    align-items: center;
+    border-radius: 40px;
+    background: #bebaba;
+    padding-top: 10px;
+    padding-left: 15px;
+    padding-right: 10px;
+}
+
+.btn_job{
+    border-radius: 40px;
+    background: lime;
+}
+
 /*.EditJob{
     display: none;
 }*/

@@ -24,6 +24,8 @@ function editJobWithId(jobId) {
     $("#" + jobId).show();
 }
 
+
+
 //$('#delete').click(function () {
 //    console.log("Delete");
 //});
