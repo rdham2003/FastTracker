@@ -15,6 +15,21 @@
   
 <div class="main_job_container">
     <div class="jobs">
+        @if (Model.Count != 0)
+        {
+            <form asp-controller="Home" asp-action="SortJobs">
+                <label>Sort by:</label>
+                <select id="sort" name="sortBy">
+                    <option value="date" name="date">Date</option>
+                    <option value="status" name="status">Status</option>
+                    <option value="alpha" name="alpha">Alphabetical</option>
+                    <option value="dateRev" name="dateRev">Date Reversed</option>
+                    <option value="statusRev" name="statusRev">Status Reversed</option>
+                    <option value="alphaRev" name="alphaRev">Alphabetical Reversed</option>
+                </select>
+                <button type="submit" id="sortJob">Sort</button>
+            </form>
+        }
         @if (Model == null || Model.Count == 0){
             <h1>No jobs added. Click below to add a new job!</h1>
             <br />
@@ -25,8 +40,8 @@
                     <p>@job.Id</p>
                     <p>@job.Name</p>
                     <p>@job.Position</p>
-                    <p>@job.PicId</p>
-                    <p>@job.Status</p>
+                    <img src="@job.PicId" height="50px"/>
+                    <p id="job_status">@job.Status</p>
                     <p>@job.DateUpdated</p>
                     <button type="button" class="btn_job" id="@($"edit{job.Id}")">Edit</button>
                     <div class="EditJob" id="@($"edit{job.Id}frm")">
@@ -66,21 +81,6 @@
             <button type="submit">Add Job</button>
         </form>
     </div>
-    @if (Model.Count != 0)
-    {
-        <form asp-controller="Home" asp-action="SortJobs">
-            <label>Sort by:</label>
-            <select id="sort" name="sortBy">
-                <option value="date" name="date">Date</option>
-                <option value="status" name="status">Status</option>
-                <option value="alpha" name="alpha">Alphabetical</option>
-                <option value="dateRev" name="dateRev">Date Reversed</option>
-                <option value="statusRev" name="statusRev">Status Reversed</option>
-                <option value="alphaRev" name="alphaRev">Alphabetical Reversed</option>
-            </select>
-            <button type="submit" id="sortJob">Sort</button>
-        </form>
-    }
 </div>
 
 <script src="~/js/site.js"></script>
