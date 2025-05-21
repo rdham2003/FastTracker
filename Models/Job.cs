@@ -1,9 +1,11 @@
-﻿using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
+﻿using System.ComponentModel.DataAnnotations;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace FastTracker.Models
 {
     public class Job
     {
+        [Key]
         public int Id { get; set; } // This must exist
         public string Name { get; set; }
         public string Position { get; set; }

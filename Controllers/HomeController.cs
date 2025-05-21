@@ -2,6 +2,7 @@ using System.Diagnostics;
 using FastTracker.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
+using System;
 
 namespace FastTracker.Controllers
 {
@@ -9,10 +10,12 @@ namespace FastTracker.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private static List<Job> jobs = new List<Job>();
+        private readonly JobDBContext _context;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, JobDBContext context)
         {
             _logger = logger;
+            _context = context;
         }
 
         public IActionResult Index()
@@ -40,6 +43,8 @@ namespace FastTracker.Controllers
             DateTime date = DateTime.Now;
             Job newJob = new Job(rand.Next(0, 99999999), job, position, url, Status.APPLIED, date);
             jobs.Add(newJob);
+            _context.Jobs.Add(newJob); 
+            _context.SaveChanges();
             return RedirectToAction("Index");
         }
 
@@ -51,6 +56,14 @@ namespace FastTracker.Controllers
                 if (job.Id == id)
                 {
                     job.Status = Enum.TryParse(status.ToUpper(), out Status newStat) ? newStat : Status.UNKNOWN;
+                    var jobInDb = _context.Jobs.FirstOrDefault(j => j.Id == id);
+                    if (jobInDb != null)
+                    {
+                        jobInDb.Status = Enum.TryParse(status.ToUpper(), out Status newStatus) ? newStat : Status.UNKNOWN;
+
+                        _context.SaveChanges();
+                    }
+
                 }
             }
             return RedirectToAction("Index");
@@ -64,6 +77,8 @@ namespace FastTracker.Controllers
                 if (job.Id == id)
                 {
                     jobs.Remove(job);
+                    _context.Jobs.Remove(job);
+                    _context.SaveChanges();
                     break;
                 }
             }
